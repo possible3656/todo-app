@@ -1,23 +1,27 @@
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:todo_yocket/app/data/models/todo_model.dart';
+import 'package:todo_yocket/app/routes/app_pages.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  RxList<TodoModel> todoModelList = <TodoModel>[].obs;
+  final box = GetStorage();
 
-  final count = 0.obs;
   @override
   void onInit() {
+    checkForPreviousTodos();
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  onNewTodoPressed() {
+    HapticFeedback.mediumImpact();
+    Get.toNamed(Routes.CREATE_TODO);
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  void checkForPreviousTodos() {
+    if (box.read('todos') != null) {
+      todoModelList.value = box.read('todos');
+    }
   }
-
-  void increment() => count.value++;
 }

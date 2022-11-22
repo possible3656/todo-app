@@ -10,6 +10,9 @@ dependencies:
   get: 4.6.5
   flutter: 
     sdk: flutter
+  line_icons: ^2.0.1
+  get_storage: ^2.0.3
+  numberpicker: ^2.1.1
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
@@ -18,4 +21,21 @@ dev_dependencies:
 
 flutter: 
   uses-material-design: true
+ 
+  assets:
+    - assets/images/
+
+
+  fonts:
+    - family: poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Black.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins-ExtraBold.ttf
+        - asset: assets/fonts/Poppins-ExtraLight.ttf
+        - asset: assets/fonts/Poppins-Light.ttf
+        - asset: assets/fonts/Poppins-Medium.ttf
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+        - asset: assets/fonts/Poppins-Thin.ttf
 
