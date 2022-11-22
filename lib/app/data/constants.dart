@@ -7,4 +7,9 @@ class Constants {
       duration: const Duration(seconds: 3),
     ));
   }
+
+  ///////////////////////////////////
+  static String TODO_LIST = 'todo_list';
+
+  static List status = ['TODO', 'IN-PROGRESS', 'DONE'];
 }

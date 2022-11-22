@@ -25,7 +25,7 @@ class CreateTodoBody extends GetView<CreateTodoController> {
           'Create\nNew Task',
           style: TextStyle(
               color: ColorRes.primaryText,
-              fontSize: 24,
+              fontSize: 28,
               letterSpacing: 1.1,
               fontWeight: FontWeight.w500),
         ),

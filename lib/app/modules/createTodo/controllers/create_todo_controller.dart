@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:todo_yocket/app/data/constants.dart';
+import 'package:todo_yocket/app/data/models/todo_model.dart';
 import 'package:todo_yocket/app/data/res/color_res.dart';
+import 'package:todo_yocket/app/modules/createTodo/views/widgets/change_time_modal_sheet.dart';
 
 class CreateTodoController extends GetxController {
   var titleTextController = TextEditingController().obs;
@@ -19,90 +25,52 @@ class CreateTodoController extends GetxController {
   changeTime() {
     showModalBottomSheet(
         context: Get.context!,
-        builder: (context) => Container(
-            decoration: BoxDecoration(
-              color: ColorRes.primaryBackground,
-            ),
-            child: Obx(
-              () => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: () => Get.back(),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                        child: Text(
-                          'Done',
-                          style: TextStyle(
-                              color: ColorRes.primaryText,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          'Minutes',
-                          style: TextStyle(
-                              color: ColorRes.secodaryText, fontSize: 18),
-                        ),
-                        NumberPicker(
-                            value: selectedMin.value,
-                            minValue: 0,
-                            infiniteLoop: true,
-                            itemWidth: 50,
-                            maxValue: 10,
-                            textStyle: TextStyle(
-                                color: ColorRes.secodaryText, fontSize: 22),
-                            selectedTextStyle: TextStyle(
-                                color: ColorRes.primaryText, fontSize: 38),
-                            onChanged: (value) {
-                              selectedMin.value = value;
-                              if (selectedMin.value == 10) {
-                                selectedSec.value = 0;
-                              }
-                              if (selectedMin.value == 0) {
-                                selectedSec.value = 1;
-                              }
-                            }),
-                        NumberPicker(
-                            value: selectedSec.value,
-                            minValue: 00,
-                            maxValue: 59,
-                            itemWidth: 50,
-                            infiniteLoop: true,
-                            textStyle: TextStyle(
-                                color: ColorRes.secodaryText, fontSize: 22),
-                            selectedTextStyle: TextStyle(
-                                color: ColorRes.primaryText, fontSize: 38),
-                            onChanged: (value) {
-                              selectedSec.value = value;
-                              if (selectedMin.value == 10) {
-                                selectedSec.value = 0;
-                              }
-                            }),
-                        Text(
-                          'Seconds',
-                          style: TextStyle(
-                              color: ColorRes.secodaryText, fontSize: 18),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            )));
+        builder: (context) => const ChangeTimeModalSheetView());
   }
 
   onCreateButtonPressed() {
-    if (titleTextController.value.text.trim().isEmpty) {
+    String title = titleTextController.value.text.trim();
+    String description = descriptionTextController.value.text.trim();
+
+    if (title.isEmpty) {
       Constants.showToast('Please enter task title');
+      return;
     }
+    TodoModel todoModel = TodoModel(
+        title, selectedMin.value, selectedSec.value, 0,
+        descritpion: description);
+
+    addTaskToList(todoModel);
+  }
+
+  onSecChanged(int value) {
+    selectedSec.value = value;
+    if (selectedMin.value == 10) {
+      selectedSec.value = 0;
+    }
+    if (selectedMin.value == 0 && selectedSec.value == 0) {
+      selectedSec.value = 1;
+    }
+  }
+
+  onMinChanged(int value) {
+    selectedMin.value = value;
+    if (selectedMin.value == 10) {
+      selectedSec.value = 0;
+    }
+    if (selectedMin.value == 0) {
+      selectedSec.value = 1;
+    }
+  }
+
+  onBackPressed() => Get.back();
+
+  void addTaskToList(TodoModel todoModel) {
+    final box = GetStorage();
+    List<String> todoModelList = box.read(Constants.TODO_LIST) ?? [];
+    todoModelList.add(jsonEncode(todoModel.toJson()));
+    box.write(Constants.TODO_LIST, todoModelList);
+    HapticFeedback.mediumImpact();
+    Get.back();
   }
 }

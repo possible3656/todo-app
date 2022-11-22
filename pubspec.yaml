@@ -13,6 +13,7 @@ dependencies:
   line_icons: ^2.0.1
   get_storage: ^2.0.3
   numberpicker: ^2.1.1
+  custom_timer: ^0.1.2
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
