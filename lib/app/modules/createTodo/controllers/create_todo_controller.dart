@@ -10,6 +10,7 @@ import 'package:todo_yocket/app/data/constants.dart';
 import 'package:todo_yocket/app/data/models/todo_model.dart';
 import 'package:todo_yocket/app/data/res/color_res.dart';
 import 'package:todo_yocket/app/modules/createTodo/views/widgets/change_time_modal_sheet.dart';
+import 'package:todo_yocket/app/modules/home/controllers/home_controller.dart';
 
 class CreateTodoController extends GetxController {
   var titleTextController = TextEditingController().obs;
@@ -66,10 +67,12 @@ class CreateTodoController extends GetxController {
   onBackPressed() => Get.back();
 
   void addTaskToList(TodoModel todoModel) {
-    final box = GetStorage();
-    List<String> todoModelList = box.read(Constants.TODO_LIST) ?? [];
-    todoModelList.add(jsonEncode(todoModel.toJson()));
-    box.write(Constants.TODO_LIST, todoModelList);
+    // final box = GetStorage();
+    // List todoModelList = box.read(Constants.TODO_LIST) ?? [];
+    // todoModelList.add(jsonEncode(todoModel.toJson()));
+    // box.write(Constants.TODO_LIST, todoModelList);
+    HomeController homeController = Get.find<HomeController>();
+    homeController.todoModelList.add(todoModel);
     HapticFeedback.mediumImpact();
     Get.back();
   }

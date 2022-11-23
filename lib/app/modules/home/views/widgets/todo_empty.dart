@@ -29,8 +29,8 @@ class TodoEmptyView extends GetView<HomeController> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 0),
                   child: Image.asset(
-                    'assets/images/todo8.gif',
-                    width: Get.width * .7,
+                    'assets/todo8.gif',
+                    width: MediaQuery.of(context).size.width * .7,
                   ),
                 ),
               ],
@@ -39,9 +39,9 @@ class TodoEmptyView extends GetView<HomeController> {
           Column(
             children: [
               SizedBox(
-                  width: Get.width * .7,
+                  width: MediaQuery.of(context).size.width * .7,
                   height: 80,
-                  child: Image.asset('assets/images/create_todo.png')),
+                  child: Image.asset('assets/create_todo.png')),
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 20),
                 child: GestureDetector(

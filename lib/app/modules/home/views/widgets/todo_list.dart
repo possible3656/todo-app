@@ -17,19 +17,3 @@ class TodoListView extends GetView<HomeController> {
             : const TodoItemListView()));
   }
 }
-
-class TimerView extends GetView<HomeController> {
-  final int index;
-  const TimerView(this.index, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomTimer(
-        controller: controller.todoModelList[index].getTimerController,
-        begin: Duration(
-            minutes: controller.todoModelList[index].timeInMin,
-            seconds: controller.todoModelList[index].timeInSec),
-        end: const Duration(),
-        builder: (time) => controller.onTimerChanged(time, index));
-  }
-}

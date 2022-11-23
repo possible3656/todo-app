@@ -17,7 +17,7 @@ class TodoModel {
   int status;
   bool paused = true;
 
-  CustomTimerController timerController = CustomTimerController();
+  final CustomTimerController timerController = CustomTimerController();
 
   TodoModel(
     this.title,
@@ -46,7 +46,7 @@ class TodoModel {
         'timeInMin': timeInMin,
         'timeInSec': timeInSec,
         'color': color,
-        'status': status
+        'status': status,
       };
 
   factory TodoModel.fromJson(Map<String, dynamic> json) => TodoModel(

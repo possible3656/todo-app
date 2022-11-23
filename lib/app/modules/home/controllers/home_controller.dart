@@ -24,7 +24,8 @@ class HomeController extends GetxController {
 
   onNewTodoPressed() {
     HapticFeedback.mediumImpact();
-    Get.toNamed(Routes.CREATE_TODO)?.then((value) => checkForPreviousTodos());
+    Get.toNamed(Routes.CREATE_TODO)!
+        .then((value) => saveNewList(todoModelList));
   }
 
   void checkForPreviousTodos() {
@@ -40,11 +41,11 @@ class HomeController extends GetxController {
   onTimerChanged(CustomTimerRemainingTime time, int index) {
     if (time.minutes == '00' && time.seconds == '00') {
       todoModelList[index].setStatus = 2;
-      todoModelList[index].paused = true;
+      // todoModelList[index].paused = true;
       // todoModelList.refresh();
+      saveNewList(todoModelList);
     }
 
-    saveNewList(todoModelList);
     todoModelList[index].timeInMin = int.parse(time.minutes);
     todoModelList[index].timeInSec = int.parse(time.seconds);
 
@@ -53,20 +54,26 @@ class HomeController extends GetxController {
   }
 
   onPlayPauseTapped(int index) {
+    print(todoModelList[index].timerController.state);
     if (todoModelList[index].status == 0) {
-      todoModelList[index].getTimerController.start();
+      todoModelList[index].timerController.start();
       todoModelList[index].setStatus = 1;
-      todoModelList[index].setPaused = false;
+      // todoModelList[index].setPaused = false;
     } else {
-      if (todoModelList[index].getTimerController.state ==
-          CustomTimerState.paused) {
-        todoModelList[index].getTimerController.start();
-        todoModelList[index].setPaused = false;
+      if (todoModelList[index].timerController.state ==
+              CustomTimerState.paused ||
+          todoModelList[index].timerController.state ==
+              CustomTimerState.reset) {
+        todoModelList[index].timerController.start();
+        // todoModelList[index].setPaused = false;
       } else {
-        todoModelList[index].getTimerController.pause();
-        todoModelList[index].setPaused = true;
+        todoModelList[index].timerController.pause();
+        // todoModelList[index].setPaused = true;
       }
     }
+
+    todoModelList.refresh();
+
     saveNewList(todoModelList);
   }
 

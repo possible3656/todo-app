@@ -1,3 +1,4 @@
+import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_yocket/app/modules/home/controllers/home_controller.dart';
@@ -21,7 +22,6 @@ class TodoItemGridView extends GetView<HomeController> {
             return GestureDetector(
               onTap: (() => controller.onPlayPauseTapped(index)),
               child: Container(
-                height: 200,
                 decoration: BoxDecoration(
                     color: ColorRes.secondaryBackground,
                     borderRadius: BorderRadius.circular(10)),
@@ -32,7 +32,17 @@ class TodoItemGridView extends GetView<HomeController> {
                     children: [
                       Column(
                         children: [
-                          TimerView(index),
+                          CustomTimer(
+                              controller: controller
+                                  .todoModelList[index].getTimerController,
+                              begin: Duration(
+                                  minutes:
+                                      controller.todoModelList[index].timeInMin,
+                                  seconds: controller
+                                      .todoModelList[index].timeInSec),
+                              end: const Duration(),
+                              builder: (time) =>
+                                  controller.onTimerChanged(time, index)),
                           Text(
                             Constants.status[
                                 controller.todoModelList[index].getStatus],
@@ -84,7 +94,9 @@ class TodoItemGridView extends GetView<HomeController> {
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 10, 10),
                                   child: Icon(
-                                    !controller.todoModelList[index].paused
+                                    controller.todoModelList[index]
+                                                .timerController.state ==
+                                            CustomTimerState.counting
                                         ? Icons.pause_circle
                                         : Icons.play_circle,
                                     size: 28,
