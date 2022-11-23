@@ -1,16 +1,24 @@
-# todo_yocket
+# Todo_yocket
+this is simple Todo app and can be used to add todo with timer.
 
-A new Flutter project.
+## App architecture
+Todo app uses below dependencies:
 
-## Getting Started
+-> This app is built using flutter framework
 
-This project is a starting point for a Flutter application.
+-> Written in dart
 
-A few resources to get you started if this is your first Flutter project:
+-> It uses GetX as state-mangement ,routing and navigations
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+-> It uses GetStorage for saving local data
+ 
+ ### How to run app
+ Todo app requires Flutter setup done on the machine.
+```
+git clone https://github.com/possible3656/todo_yocket
+cd todo_yocket
+flutter pub get
+flutter run --release
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
