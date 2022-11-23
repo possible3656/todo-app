@@ -1,6 +1,11 @@
 # Todo_yocket
 this is simple Todo app and can be used to add todo with timer.
 
+
+
+<img src="https://github.com/possible3656/todo_yocket/blob/master/ss/home.gif" width="200" height="445">  <img src="https://github.com/possible3656/todo_yocket/blob/master/ss/Screenshot_20221123-170726.png" width="200" height="445">  <img src="https://github.com/possible3656/todo_yocket/blob/master/ss/Screenshot_20221123-170854.png" width="200" height="445">  <img src="https://github.com/possible3656/todo_yocket/blob/master/ss/Screenshot_20221123-171121.png" width="200" height="445">
+
+
 ## App architecture
 Todo app uses below dependencies:
 
