@@ -21,6 +21,17 @@ class HomeView extends GetView<HomeController> {
             style: TextStyle(color: ColorRes.primaryText),
           ),
         ),
+        floatingActionButton: Obx(() => controller.todoModelList.isEmpty
+            ? Container()
+            : FloatingActionButton(
+                onPressed: (() => controller.onNewTodoPressed()),
+                backgroundColor: ColorRes.secondaryBackground,
+                child: Icon(
+                  Icons.add,
+                  color: ColorRes.primaryText,
+                  size: 32,
+                ),
+              )),
         body: Obx(() => controller.todoModelList.isEmpty
             ? const TodoEmptyView()
             : const TodoListView()));

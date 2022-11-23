@@ -12,8 +12,8 @@ class TodoModel {
   final String title;
   final String? descritpion;
   final Color? color;
-  final int timeInSec;
-  final int timeInMin;
+  int timeInSec;
+  int timeInMin;
   int status;
   bool paused = true;
 

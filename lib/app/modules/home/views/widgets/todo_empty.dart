@@ -29,11 +29,8 @@ class TodoEmptyView extends GetView<HomeController> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 0),
                   child: Image.asset(
-                    'assets/images/todo2.png',
-                    // 'assets/images/new_todo.gif',
-                    height: 100,
-                    // height: 150,
-                    fit: BoxFit.cover,
+                    'assets/images/todo8.gif',
+                    width: Get.width * .7,
                   ),
                 ),
               ],
