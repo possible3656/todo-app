@@ -14,6 +14,8 @@ class HomeController extends GetxController {
   RxList<TodoModel> todoModelList = <TodoModel>[].obs;
   final box = GetStorage();
 
+  var gridSelected = false.obs;
+
   @override
   void onInit() {
     checkForPreviousTodos();
@@ -105,5 +107,9 @@ class HomeController extends GetxController {
       todoModelList.refresh();
     });
     // print(todoModelList[0].timeInSec);
+  }
+
+  onChangeTypePressed() {
+    gridSelected.value = !gridSelected.value;
   }
 }

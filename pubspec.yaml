@@ -14,11 +14,15 @@ dependencies:
   get_storage: ^2.0.3
   numberpicker: ^2.1.1
   custom_timer: ^0.1.2
+  splash_screen_view: ^3.0.0
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
   flutter_test: 
     sdk: flutter
+
+splash_screen_view:
+  color: "#091323"
 
 flutter: 
   uses-material-design: true

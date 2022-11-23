@@ -20,6 +20,26 @@ class HomeView extends GetView<HomeController> {
             'Todo-yocket',
             style: TextStyle(color: ColorRes.primaryText),
           ),
+          actions: [
+            Obx(
+              () => controller.todoModelList.isEmpty
+                  ? Container()
+                  : InkWell(
+                      onTap: () => controller.onChangeTypePressed(),
+                      child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: controller.gridSelected.value
+                              ? Icon(
+                                  Icons.list_outlined,
+                                  color: ColorRes.primaryText,
+                                )
+                              : Icon(
+                                  Icons.grid_view_rounded,
+                                  color: ColorRes.primaryText,
+                                )),
+                    ),
+            )
+          ],
         ),
         floatingActionButton: Obx(() => controller.todoModelList.isEmpty
             ? Container()
