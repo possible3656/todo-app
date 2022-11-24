@@ -1,4 +1,4 @@
-# Todo_yocket
+# Todo
 this is simple Todo app and can be used to add todo with timer.
 
 
@@ -20,8 +20,8 @@ Todo app uses below dependencies:
  ### How to run app
  Todo app requires Flutter setup done on the machine.
 ```
-git clone https://github.com/possible3656/todo_yocket
-cd todo_yocket
+git clone https://github.com/possible3656/todo-app
+cd todo-app
 flutter pub get
 flutter run --release
 ```
